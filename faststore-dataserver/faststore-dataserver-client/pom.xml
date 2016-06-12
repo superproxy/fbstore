@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>faststore-dataserver</artifactId>
+        <groupId>faststore</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>fastore-dataserver-client</artifactId>
+    <dependencies>
+
+        <dependency>
+            <groupId>faststore</groupId>
+            <artifactId>faststore-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>faststore</groupId>
+            <artifactId>faststore-configserver-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>faststore</groupId>
+            <artifactId>faststore-configserver-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>faststore</groupId>
+            <artifactId>faststore-dataserver-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>faststore</groupId>
+            <artifactId>faststore-net-thrift</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/org.apache.curator/curator-framework -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!--&lt;!&ndash; http://mvnrepository.com/artifact/org.apache.curator/curator-client &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.curator</groupId>-->
+        <!--<artifactId>curator-client</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+
+        <!-- http://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+
+        <!-- http://mvnrepository.com/artifact/io.netty/netty -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.10.5.Final</version>
+        </dependency>
+
+
+        <!-- http://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>
