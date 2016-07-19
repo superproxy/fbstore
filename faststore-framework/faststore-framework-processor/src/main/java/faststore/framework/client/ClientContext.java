@@ -1,6 +1,9 @@
 package faststore.framework.client;
 
 public class ClientContext {
+    /**
+     * transport type
+     */
     private String clientType;
     private String protocolType;
     private String remoteIp;

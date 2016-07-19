@@ -2,10 +2,11 @@ package fastore.dataserver.client;
 
 import faststore.dataserver.api.vo.GetCmd;
 import faststore.dataserver.api.vo.SetCmd;
-import faststore.framework.processor.biz.common.RequestCode;
 import faststore.framework.processor.biz.common.CommonHeader;
+import faststore.framework.processor.biz.common.RequestCode;
 import faststore.framework.processor.biz.request.CommonRequest;
 import faststore.framework.protocol.ProtocolType;
+import faststore.framework.protocol.TransportType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,14 +14,15 @@ import org.testng.annotations.Test;
 public class DirectDataClientImplTest {
     private DataClient client;
     int n = 10000;
-    //    String ip ="127.0.0.1";
-    String ip = "10.27.113.40";
-    int port =5999;
+    String ip = "127.0.0.1";
+    //    String ip = "10.27.113.40";
+    int port = 5999;
+    String clientType = TransportType.NETTY.name();
     String protocol = ProtocolType.FASTSTORE.name();
 
     @BeforeMethod
     public void init() {
-        client = new DirectDataClientImpl(ip, port, protocol);
+        client = new DirectDataClientImpl(ip, port, clientType, protocol);
     }
 
     @Test

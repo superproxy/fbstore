@@ -12,11 +12,14 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 基于netty实现的server服务
  */
 public class AppServer implements Server {
+    private final static Logger logger = LoggerFactory.getLogger(AppServer.class);
 
     private ServerContext serverContext;
 
@@ -42,7 +45,8 @@ public class AppServer implements Server {
     }
 
     public void start() throws Exception {
-        run();
+        logger.info("netty server is starting....");
+        run(); // loop
     }
 
 

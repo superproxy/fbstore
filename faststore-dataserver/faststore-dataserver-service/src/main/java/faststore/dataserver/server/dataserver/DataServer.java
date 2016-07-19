@@ -6,6 +6,9 @@ import faststore.configserver.api.leader.LeaderListener;
 import faststore.configserver.api.node.NodeInfo;
 import faststore.configserver.api.shard.Shard;
 import faststore.configserver.client.ConfigClientImpl;
+import faststore.dataserver.server.dataserver.config.DataServerConfig;
+import faststore.dataserver.server.dataserver.handler.GetCmdRequestHandler;
+import faststore.dataserver.server.dataserver.handler.SetCmdRequestHandler;
 import faststore.framework.processor.biz.handler.DefaultRequestHandlerChains;
 import faststore.framework.protocol.ProtocolType;
 import faststore.framework.protocol.TransportType;
@@ -14,9 +17,6 @@ import faststore.framework.server.ServerConfig;
 import faststore.framework.server.ServerContext;
 import faststore.framework.storage.StorageType;
 import org.apache.commons.lang3.StringUtils;
-import faststore.dataserver.server.dataserver.config.DataServerConfig;
-import faststore.dataserver.server.dataserver.handler.GetCmdRequestHandler;
-import faststore.dataserver.server.dataserver.handler.SetCmdRequestHandler;
 
 import java.util.Date;
 import java.util.ServiceLoader;
@@ -26,7 +26,7 @@ public class DataServer {
     private static int port = 5999;
     private static String nodeName = "dataserver1";
     private static String nodeIp = "127.0.0.1";
-    private static String zk ="";// "127.0.0.1:2181";
+    private static String zk = "";// "127.0.0.1:2181";
     private static String groupName = "group0";
     private static String shardName = "shard0";
     private static String dbPath = "/data/leveldb1";
@@ -34,7 +34,7 @@ public class DataServer {
 
     private static ServerContext buildServerContext() {
         ServerContext serverContext = new ServerContext();
-        ServerConfig serverConfig = new ServerConfig(port);
+        ServerConfig serverConfig = new ServerConfig();
         serverConfig.setPort(port);
         serverConfig.setServerType(TransportType.NETTY.name());
         serverConfig.setProtocol(ProtocolType.FASTSTORE.name());
@@ -56,16 +56,18 @@ public class DataServer {
         String serverType = serverContext.getServerConfig().getServerType();
         Server server = null;
         for (Server s : serviceLoader) {
-            if (s.getClass().getName().contains(serverType)) {
+            if (s.getClass().getName().contains(serverType.toLowerCase())) {
                 server = s;
                 break;
             }
         }
 
-        if (server != null) {
-            server.init(serverContext);
-            server.start();
+        if (server == null) {
+            throw new UnsupportedOperationException("no server found" + serverType);
         }
+
+        server.init(serverContext);
+        server.start();
 
         if (StringUtils.isNotEmpty(zk)) {
             initConfigClient();

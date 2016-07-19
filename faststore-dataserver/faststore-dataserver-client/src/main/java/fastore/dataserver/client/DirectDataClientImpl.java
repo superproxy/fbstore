@@ -14,18 +14,19 @@ import java.util.ServiceLoader;
 
 public class DirectDataClientImpl implements DataClient {
     private  Client client;
-    public  DirectDataClientImpl(String  remoteIp, int port, String clientType) {
-        this.client = init(remoteIp, port, clientType);
+    public  DirectDataClientImpl(String  remoteIp, int port, String clientType,String protocolType) {
+        this.client = init(remoteIp, port, clientType, protocolType);
     }
-    private Client init(String remoteIp, int port, String clientType) {
+    private Client init(String remoteIp, int port, String clientType, String protocolType) {
         ClientContext clientContext = new ClientContext();
 
         clientContext.setClientType(clientType);
+        clientContext.setProtocolType(protocolType);
         clientContext.setRemoteIp(remoteIp);
         clientContext.setRemotePort(port);
         ServiceLoader<Client> serviceLoader = ServiceLoader.load(Client.class);
         for (Client c : serviceLoader) {
-            if (c.getClass().getName().contains(clientType)) {
+            if (c.getClass().getName().contains(clientType.toLowerCase())) {
                 try {
                     c.init(clientContext);
                 } catch (Exception e) {
